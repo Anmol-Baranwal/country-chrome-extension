@@ -1,11 +1,13 @@
 import React, { useState } from "react"
 
 import { LocationButton } from "~features/location-button"
+import { ShowLocation } from "~features/show-location"
 
 import "~style.css"
 
 function IndexPopup() {
   const [loading, setLoading] = useState<boolean>(false)
+  const [errorMsg, setErrorMsg] = useState<string>("")
 
   // to display the info
   const [country, setCountry] = useState<string>("")
@@ -13,8 +15,9 @@ function IndexPopup() {
 
   const handleFetchLocation = async () => {
     setLoading(true)
+    setErrorMsg("")
     try {
-      // to get geolocation
+      // to get ip address
       const Response = await fetch("https://api.ipify.org?format=json") // sample output: {"ip":"98.207.254.136"}
 
       // good for displaying custom message
@@ -27,9 +30,9 @@ function IndexPopup() {
       // as denoted by the sample output
       const ipVal = ipData.ip
 
-      // call ipinfo.io API to get the location
+      // call ipinfo.io API to get the geolocation
       const locResponse = await fetch(
-        `https://ipinfo.io/${ipVal}/geo?token=${process.env.PLASMO_PUBLIC_IPINFO_TOKEN}`
+        `https://ipinfo.io/${ipVal}?token=${process.env.PLASMO_PUBLIC_IPINFO_API_TOKEN}`
       )
 
       if (!locResponse.ok) {
@@ -41,14 +44,27 @@ function IndexPopup() {
 
       setCity(city)
       setCountry(country)
+      setErrorMsg("")
     } catch (error) {
-      console.log("Error in fetching geolocation", error)
+      console.log("Error in fetching geolocation" + error)
+      setErrorMsg(error.message)
+    } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="plasmo-flex plasmo-items-center plasmo-justify-center plasmo-h-[500px] plasmo-w-[500px]">
+    <div className="plasmo-flex plasmo-flex-col plasmo-items-center plasmo-justify-center plasmo-h-[500px] plasmo-w-[500px] plasmo-border-2 plasmo-border-solid plasmo-border-dark">
+      {city && country && (
+        <div className="plasmo-mb-4">
+          <ShowLocation city={city} country={country} />
+        </div>
+      )}
+      {errorMsg && (
+        <p className="plasmo-my-3 plasmo-text-lg plasmo-text-gray-text">
+          {errorMsg}
+        </p>
+      )}
       <LocationButton
         txt="Show My Location"
         loading={loading}
