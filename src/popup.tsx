@@ -32,7 +32,7 @@ function IndexPopup() {
   }
 
   return (
-    <div className="plasmo-flex plasmo-flex-col plasmo-items-center plasmo-justify-center plasmo-h-[500px] plasmo-w-[500px] plasmo-border-2 plasmo-border-solid plasmo-border-dark">
+    <div className="bg-image plasmo-flex plasmo-flex-col plasmo-items-center plasmo-justify-center plasmo-h-[500px] plasmo-w-[500px] plasmo-border-2 plasmo-border-solid plasmo-border-dark">
       {city && country && (
         <div className="plasmo-mb-4">
           <ShowLocation city={city} country={country} />
