@@ -8,7 +8,7 @@ This project is a [Plasmo extension](https://docs.plasmo.com/) bootstrapped with
 
 ## :fire: Demo
 
-A demo is included in the repository. If you are unable to access the video, you can visit [here](demo-link) to see the demo.
+A [demo](Demo%20(Chrome%20Extension).mp4) is included in the repository. If you are unable to access the video, you can visit [here](https://drive.google.com/file/d/1nLhB3BAANvOBkIfPu-0RPKpMd1pmhF_v/view?usp=sharing) to see the demo.
 
 ---
 
