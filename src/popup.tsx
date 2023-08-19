@@ -1,3 +1,4 @@
+import React from "react"
 import { CountButton } from "~features/count-button"
 
 import "~style.css"
